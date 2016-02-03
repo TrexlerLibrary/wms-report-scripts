@@ -21,7 +21,7 @@ NR == 1 {
   gsub(/"|\\/, "\\\\&")
 
   split($0, ROW, FS)
-  print "{"
+  printf "{"
 
   COUNT = 1
 
@@ -55,7 +55,7 @@ NR == 1 {
       VAL = "\"" VAL "\""
     }
 
-    printf "\"%s\": %s%s\n", KEY, VAL, (COUNT <= NF ? "," : "")
+    printf "\"%s\": %s%s", KEY, VAL, (COUNT <= NF ? "," : "")
   }
 
   printf "}\n"
