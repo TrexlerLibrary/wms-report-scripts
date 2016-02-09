@@ -45,9 +45,6 @@ BEGIN {
   cmd | getline datespec
   close(cmd)
 
-  print datespec
-  exit
-
   COMP_TIME = mktime(datespec)
 }
 
