@@ -8,12 +8,32 @@
 BEGIN {
   FS  = "|"
   OFS = ""
+
+  # ND MODE is, by default, left on.
+  #   on: json objects are emitted individually
+  #  off: results are returned as a json array
+  ND_MODE = (nd == "false" || nd = "0") ? 0 : 1
+
+  if (!ND_MODE) {
+    printf "["
+  }
+}
+
+END {
+  if (!ND_MODE) {
+    printf "]"
+  }
 }
 
 # at headers, store for later
 NR == 1 {
   split($0, HEADERS, FS)
   next
+}
+
+# separate entries with a comma
+!ND_MODE && NR > 2 {
+  printf ","
 }
 
 {
