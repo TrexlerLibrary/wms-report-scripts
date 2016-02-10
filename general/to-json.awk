@@ -12,7 +12,7 @@ BEGIN {
   # ND MODE is, by default, left on.
   #   on: json objects are emitted individually
   #  off: results are returned as a json array
-  ND_MODE = (nd == "false" || nd = "0") ? 0 : 1
+  ND_MODE = (nd == "false" || nd == "0") ? 0 : 1
 
   if (!ND_MODE) {
     printf "["
