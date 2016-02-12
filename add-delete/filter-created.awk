@@ -5,8 +5,8 @@
 # usage:
 #   awk -f filter-created.awk <report filename>
 #
-# pass `-v headers=0` before the file to exclude headers
-#   awk -v headers=0 -f filter-created.awk <report filename>
+# pass `-v header=0` before the file to exclude header
+#   awk -v header=0 -f filter-created.awk <report filename>
 
 BEGIN {
   FS = "|"
@@ -14,7 +14,7 @@ BEGIN {
 }
 
 NR == 1 {
-  if (headers == "0" || headers == "false")
+  if (header == "0" || header == "false")
     next
   else
     print $0
