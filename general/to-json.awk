@@ -3,7 +3,23 @@
 # emits newline-delimited json objects from a report
 # (useful for piping)
 #
-# usage: awk -f to-json.awk <report filename>
+# usage: awk -f to-json.awk /path/to/report
+#
+# Pass the variable `nd` to toggle off newline-delimited mode
+# (results will be returned wrapped in a JSON array)
+# set to `0` or `false`
+#
+# ex.
+#   awk -v nd=false -f to-json.awk /path/to/report
+#   awk -v nd=0 -f to-json.awk /path/to/report
+#
+# Pass the variable `clean_headers` to pass headers through
+# untouched (otherwise, they're converted to snake_case). as
+# with `nd`, use `0` or `false`
+#
+# ex.
+#   awk -v clean_headers=false to-json.awk /path/to/report
+#   awk -v clean_headers=0 to-json.awk /path/to/report
 
 BEGIN {
   FS  = "|"
@@ -13,6 +29,9 @@ BEGIN {
   #   on: json objects are emitted individually
   #  off: results are returned as a json array
   ND_MODE = (nd == "false" || nd == "0") ? 0 : 1
+
+  # CLEAN_HEADERS mode normalizes the headers row to be snake_cased
+  CLEAN_HEADERS = (clean_headers == "false" || clean_headers == "0")  ? 0 : 1
 
   if (!ND_MODE) {
     printf "["
@@ -28,6 +47,14 @@ END {
 # at headers, store for later
 NR == 1 {
   split($0, HEADERS, FS)
+
+  if (CLEAN_HEADERS == 1) {
+    for (h in HEADERS) {
+      gsub(/\s|\./, "_", HEADERS[h])
+      HEADERS[h] = tolower(HEADERS[h])
+    }
+  }
+
   next
 }
 
