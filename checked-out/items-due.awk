@@ -7,7 +7,7 @@
 #   awk -f items-due.awk /path/to/All_Checked_out_items
 #
 # passing the variable `n` to awk will allow you to set the due date to compare
-# against (use `+n` to set `n` days in the future, use `-n` for `n` days previous).
+# against (use `+n` to set n days in the future, use `-n` for n days previous).
 #
 # ex.
 #   awk -v n=-2 items-due.awk /path/to/All_Checked_out_items
@@ -34,18 +34,24 @@ BEGIN {
   }
 
   # linux `date` command
-  #cmd = "date -d \"" n " day\" \"+%Y %m %d 00 00 00\""
+  #cmdMin = "date -d \"" n " day\" \"+%Y %m %d 00 00 00\""
+  #cmdMax = "date -d \"" n " day\" \"+%Y %m %d 23 59 59\""
 
   # mac `date` command
-  cmd = "date -v " n "d \"+%Y %m %d 00 00 00\""
+  cmdMin = "date -v " n "d \"+%Y %m %d 00 00 00\""
+  cmdMax = "date -v " n "d \"+%Y %m %d 23 59 59\""
 
   # protect ya neck from accidentally commenting out both
-  if (!cmd) exit 1
+  if (!cmdMin || !cmdMax) exit 1
 
-  cmd | getline datespec
-  close(cmd)
+  cmdMin | getline datespecMin
+  close(cmdMin)
 
-  COMP_TIME = mktime(datespec)
+  cmdMax | getline datespecMax
+  close(cmdMax)
+
+  COMP_TIME_MIN = mktime(datespecMin)
+  COMP_TIME_MAX = mktime(datespecMax)
 }
 
 NR == 1 {
@@ -59,9 +65,11 @@ NR == 1 {
 
 {
   DD = $9
-  gsub(/-|:/, " ", DD)
 
-  if (mktime(DD) <= COMP_TIME) {
+  gsub(/-|:/, " ", DD)
+  time = mktime(DD)
+
+  if (time >= COMP_TIME_MIN && time <= COMP_TIME_MAX) {
     print $0
   }
 }
