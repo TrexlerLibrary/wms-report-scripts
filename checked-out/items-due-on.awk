@@ -1,17 +1,17 @@
-# items-due.awk
+# items-due-on.awk
 #
 # checks for items that are coming due, or are due in `n` days
 # (`n` can be positive or negative)
 #
 # usage:
-#   awk -f items-due.awk /path/to/All_Checked_out_items
+#   awk -f items-due-on.awk /path/to/All_Checked_out_items
 #
 # passing the variable `n` to awk will allow you to set the due date to compare
 # against (use `+n` to set n days in the future, use `-n` for n days previous).
 #
 # ex.
-#   awk -v n=-2 items-due.awk /path/to/All_Checked_out_items
-#   awk -v n=+2 items-due.awk /path/to/All_Checked_out_items
+#   awk -v n=-2 items-due-on.awk /path/to/All_Checked_out_items
+#   awk -v n=+2 items-due-on.awk /path/to/All_Checked_out_items
 #
 # NOTE: Only passing a number (and no sign) will set the date to that number.
 # (passing `n=7` will set the date to the 7th of the current month)
