@@ -1,8 +1,15 @@
 # `Item_Inventories` scripts
 
-## `course-reserves-inventory.awk`
+## [`course-reserves.awk`][cr]
 
-Generates a report of items placed on reserve
+Filter for items whose `Temp Shelving Location` contains "Reserve"
+
+### usage
+
+    awk -f course-reserves.awk /path/to/Item_Inventories
+
+[cr]: ./course-reserves.awk
+
 
 ## Report column headings
 

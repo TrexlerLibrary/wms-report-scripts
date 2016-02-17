@@ -5,7 +5,7 @@
 #
 # usage: awk -f to-json.awk /path/to/report
 #
-# Pass the variable `nd` to toggle off newline-delimited mode
+# Use the variable `nd` to toggle off newline-delimited mode
 # (results will be returned wrapped in a JSON array)
 # set to `0` or `false`
 #
@@ -13,7 +13,7 @@
 #   awk -v nd=false -f to-json.awk /path/to/report
 #   awk -v nd=0 -f to-json.awk /path/to/report
 #
-# Pass the variable `clean_headers` to pass headers through
+# Use the variable `clean_headers` to pass headers through
 # untouched (otherwise, they're converted to snake_case). as
 # with `nd`, use `0` or `false`
 #

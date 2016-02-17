@@ -1,5 +1,36 @@
 # `Patron_Report_Full` scripts
 
+## [blocked-patrons.awk][bp]
+
+Simple filter to return all blocked patrons
+
+### usage
+
+    awk -f blocked-patrons.awk /path/to/Patron_Report_Full
+
+Pass `-v header=0` to skip printing header
+
+    awk -v header=0 -f blocked-patrons.awk | wc -l
+
+## [fines-filter.awk][ff]
+
+Filter out patrons with fines over $n. If n's not provided, filters out _all_
+patrons with fines.
+
+### usage
+
+    awk -f fines-filter.awk /path/to/Patron_Report_Full
+
+Use the variable `amount` to set the fine threshold.
+
+    awk -v amount=50 -f fines-filter.awk /path/to/Patron_Report_Full
+
+will only pass through patrons whose total fines is over $50
+
+
+[bp]: ./blocked-patrons.awk
+[ff]: ./fines-filter.awk
+
 ## Report column headings
 (Dates are in `YYYY-MM-DD HH:MM:SS`)
 
