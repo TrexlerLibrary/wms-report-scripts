@@ -1,9 +1,17 @@
 # `All_Checked_out_items` scripts
 
-## [items-due-on.awk][ido]
+## [items-due-on.awk][ido] / [items-due-on-bsd.awk][ido-bsd]
 
-checks for items that are coming due, or are due in `n` days
+Checks for items that are coming due, or are due in `n` days
 (`n` can be positive or negative)
+
+On BSD (and similar OS's, *cough*OSX*cough*) you'll want to use
+`items-due-on-bsd.awk`, which uses `date -v nd` to set the date that is used for
+comparison. `items-due-on.awk` uses `date -d "n day"`. This seemed like a better
+solution than relying on commenting out blocks of code.
+
+(Please feel free to [submit a pull-request][pr] if you've got a better
+solution!)
 
 ### usage
     awk -f items-due-on.awk /path/to/All_Checked_out_items
@@ -25,6 +33,10 @@ against (use `+n` to set n days in the future, use `-n` for n days previous).
 * NOTE: This script requires awk to have the `mktime` function, which isn't
   present in at least Mac OS X (see https://discussions.apple.com/thread/3302970).
   Using gawk is a handy alternative (available through Homebrew on OS X).
+
+[ido]: ./items-due-on.awk
+[ido-bsd]: ./items-due-on-bsd.awk
+[pr]: https://github.com/TrexlerLibrary/wms-report-scripts/pulls
 
 
 ## Report column headings
@@ -55,5 +67,3 @@ awk `$` var | heading name
 21          | Email Address
 22          | Borrower Category
 23          | Patron Expiration Date
-
-[ido]: ./items-due-on.awk
