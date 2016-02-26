@@ -6,7 +6,7 @@ for information about setting up automatic retrieval of those reports.
 Directory              | WMS report
 -----------------------|--------------
 [add-delete][ad]       | `Circulation_add_delete`
-[checked-out][co]      | `All_Checked_out_items
+[checked-out][co]      | `All_Checked_out_items`
 [general][gen]         | All WMS reports
 [item-inventories][ii] | `Item_Inventories`
 [patron-full][pf]      | `Patron_Report_Full`
