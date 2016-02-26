@@ -53,9 +53,16 @@ match against the Shelving Location column.
 The above will pass items in `Main Collection`, but will skip `Main Collection - Reference`.
 
 
+## [temp-location.awk][tl]
+
+Filter items by temporary shelving location. See [shelving-location.awk][sl] for
+usage info.
+
+
 [cr]: ./course-reserves.awk
 [no]: ./notes.awk
 [sl]: ./shelving-location.awk
+[tl]: ./temp-location.awk
 
 
 ## Report column headings
