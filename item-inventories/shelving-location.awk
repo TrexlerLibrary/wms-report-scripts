@@ -5,7 +5,7 @@
 # usage:
 #   awk -v location="Main Collection" -f shelving-location.awk /path/to/Item_Inventories
 #
-# In it's default "loose" mode, the `location` can use regex:
+# In its default "loose" mode, the `location` can use regex:
 #
 #   awk -v location="^Main" -f shelving-location.awk /path/to/Item_Inventories
 #   awk -v location="(2|4) Hour Reserves" -f shelving-location.awk /path/to/Item_Inventories
