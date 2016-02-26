@@ -1,6 +1,6 @@
 # `Item_Inventories` scripts
 
-## [`course-reserves.awk`][cr]
+## [course-reserves.awk][cr]
 
 Filter for items whose `Temp Shelving Location` contains "Reserve"
 
@@ -8,7 +8,22 @@ Filter for items whose `Temp Shelving Location` contains "Reserve"
 
     awk -f course-reserves.awk /path/to/Item_Inventories
 
+## [shelving-location.awk][sl]
+
+filter items by shelving location
+
+### usage
+
+    awk -v location="Main Collection" -f shelving-location.awk /path/to/Item_Inventories
+
+To enable loose matching, set `loose=1`. This mode uses regex to match against
+the Shelving Location column.
+
+    awk -v loose=1 -v location="Main" -f shelving-location.awk /path/to/Item_Inventories
+    awk -v loose=1 -v location="(2|4) Hour Reserves" -f shelving-location.awk /path/to/Item_Inventories
+
 [cr]: ./course-reserves.awk
+[sl]: ./shelving-location.awk
 
 
 ## Report column headings
