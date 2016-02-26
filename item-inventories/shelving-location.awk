@@ -32,6 +32,10 @@ BEGIN {
   }
 
   STRICT_MODE = (strict == "1" || strict == "true") ? 1 : 0
+
+  if (STRICT_MODE == 0) {
+    IGNORECASE = 1
+  }
 }
 
 NR == 1 {
