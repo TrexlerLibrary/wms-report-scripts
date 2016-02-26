@@ -9,6 +9,29 @@ Filter for items whose `Temp Shelving Location` contains "Reserve"
     awk -f course-reserves.awk /path/to/Item_Inventories
 
 
+## [notes.awk][no]
+
+Passes items if Public/Staff note fields match query
+
+### usage
+
+    awk -v note="On display" -f notes.awk /path/to/Item_Inventories
+
+In its default "loose" mode, the `note` field can be a regular expression
+
+    awk -v note="Contains [0-9]+ discs" -f notes.awk /path/to/Item_Inventories
+    awk -v note="^!" -f notes.awk /path/to/Item_Inventories
+
+To use "strict" mode (which uses `==` for matching), use the `-v strict=1` flag
+
+    awk -v note="Contains 7 discs" -v strict=1 -f notes.awk /path/to/Item_Inventories
+
+Use the `type` variable to specify which note field to look in (both are
+searched by default)
+
+    awk -v note="On display" -v type="staff" -f notes.awk /path/to/Item_Inventories
+
+
 ## [shelving-location.awk][sl]
 
 Filter items by shelving location
@@ -29,9 +52,10 @@ match against the Shelving Location column.
 
 The above will pass items in `Main Collection`, but will skip `Main Collection - Reference`.
 
-[cr]: ./course-reserves.awk
-[sl]: ./shelving-location.awk
 
+[cr]: ./course-reserves.awk
+[no]: ./notes.awk
+[sl]: ./shelving-location.awk
 
 
 ## Report column headings
