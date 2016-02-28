@@ -1,14 +1,5 @@
 # `Item_Inventories` scripts
 
-## [course-reserves.awk][cr]
-
-Filter for items whose `Temp Shelving Location` contains "Reserve"
-
-### usage
-
-    awk -f course-reserves.awk /path/to/Item_Inventories
-
-
 ## [notes.awk][no]
 
 Passes items if Public/Staff note fields match query
