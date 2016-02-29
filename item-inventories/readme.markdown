@@ -1,5 +1,11 @@
 # `Item_Inventories` scripts
 
+## [holding-location.awk][hl]
+
+Filter items by holding location institution symbol. See [shelving-location.awk][sl]
+for usage info.
+
+
 ## [notes.awk][no]
 
 Passes items if Public/Staff note fields match query
@@ -50,7 +56,7 @@ Filter items by temporary shelving location. See [shelving-location.awk][sl] for
 usage info.
 
 
-[cr]: ./course-reserves.awk
+[hl]: ./holding-location.awk
 [no]: ./notes.awk
 [sl]: ./shelving-location.awk
 [tl]: ./temp-location.awk
