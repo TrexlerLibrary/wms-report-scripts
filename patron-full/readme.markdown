@@ -37,7 +37,8 @@ _all_ patrons with fines
 
 Use the variable `amount` to set the fine threshold. Use the variable `op` to
 change the comparison operation. By default, the operation used is greater-than
-equal-to (>=).
+equal-to (>=). Allows symbolic operators (`<`, `<=`, `>`, `>=`, `==`) and
+alphabetical operators (`gt`, `gteq`, `lt`, `lteq`, `eq`).
 
     awk -v amount=50 -f filter-fines.awk /path/to/Patron_Report_Full
 
