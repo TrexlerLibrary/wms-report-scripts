@@ -12,6 +12,7 @@ Pass `-v header=0` to skip printing header
 
     awk -v header=0 -f blocked-patrons.awk | wc -l
 
+
 ## [filter-categories.awk][fc]
 
 Filter patrons by their `Borrower Category` field using the variable `category`.
@@ -24,25 +25,33 @@ Include multiple categories separated by a comma.
 
     awk -v category=Student,Faculty -f filter-category.awk /path/to/Patron_Report_Full
 
+
 ## [filter-fines.awk][ff]
 
-Pass patrons with fines over $n. If n is not provided, filters out _all_
-patrons with fines.
+Filter out patrons with fines compared to $n. If n's not provided, filters out
+_all_ patrons with fines
 
 ### usage
 
     awk -f filter-fines.awk /path/to/Patron_Report_Full
 
-Use the variable `amount` to set the fine threshold.
+Use the variable `amount` to set the fine threshold. Use the variable `op` to
+change the comparison operation. By default, the operation used is greater-than
+equal-to (>=).
 
     awk -v amount=50 -f filter-fines.awk /path/to/Patron_Report_Full
 
-will only pass through patrons whose total fines is over $50
+will pass through patrons whose total fines is greater-than or equal-to $50.
+
+    awk -v amount=50 -op="==" -f filter-fines.awk /path/to/Patron_Report_Full
+
+will only pass through patrons with total fines equaling $50
 
 
 [bp]: ./blocked-patrons.awk
 [fc]: ./filter-category.awk
 [ff]: ./filter-fines.awk
+
 
 ## Report column headings
 (Dates are in `YYYY-MM-DD HH:MM:SS`)
