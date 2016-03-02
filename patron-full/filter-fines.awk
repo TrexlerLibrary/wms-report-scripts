@@ -8,7 +8,8 @@
 #
 # Use the variable `amount` to set the fine threshold. Use the variable `op` to
 # change the comparison operation. By default, the operation used is greater-than
-# equal-to (>=).
+# equal-to (>=). Allows symbolic operators ("<", "<=", ">", ">=", "==") and
+# alphabetical operators ("gt", "gteq", "lt", "lteq", "eq").
 #
 # ex.
 #   awk -v amount=50 -f filter-fines.awk /path/to/Patron_Report_Full
@@ -30,32 +31,35 @@ BEGIN {
     FINE_THRESHOLD = sprintf("%f", 0)
   }
 
-  switch (op) {
-    case "<":
-    case "lt":
-      OPERATION = "LT"
-      break
+  DEFAULT_OPERATION = "GTEQ"
 
-    case ">":
-    case "gt":
-      OPERATION = "GT"
-      break
+  # use if/else statements instead of switch b/c some versions of (g)awk
+  # may be compiled without switch
 
-    case "==":
-    case "eq":
-      OPERATION = "EQ"
-      break
+  op = tolower(op)
 
-    case "<=":
-    case "lteq":
-      OPERATION = "LTEQ"
-      break
+  if (!op) {
+    OPERATION = DEFAULT_OPERATION
+  }
 
-    case ">=":
-    case "gteq":
-    default:
-      OPERATION = "GTEQ"
-      break
+  else if (op == "<" || op == "lt") {
+    OPERATION = "LT"
+  }
+
+  else if (op == ">" || op == "gt") {
+    OPERATION = "GT"
+  }
+
+  else if (op == "==" || op == "eq") {
+    OPERATION = "EQ"
+  }
+
+  else if (op == "<=" || op == "lteq") {
+    OPERATION = "LTEQ"
+  }
+
+  else {
+    OPERATION = DEFAULT_OPERATION
   }
 
   # need to add 0 to cast to number
