@@ -55,6 +55,9 @@ NR == 1 {
 
 {
   for (f in FIELDS) {
+    if (f == "")
+      next
+
     split($FIELDS[f], NOTES, "^")
     for (n in NOTES) {
       if (STRICT_MODE == 1) {
