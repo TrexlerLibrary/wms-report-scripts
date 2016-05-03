@@ -25,7 +25,7 @@ BEGIN {
   FS = "|"
   OFS = "|"
 
-  if (!note)
+  if (!note && !type)
     exit
 
   type = tolower(type)
